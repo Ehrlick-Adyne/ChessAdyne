@@ -17,11 +17,11 @@ namespace ChessAdyne {
 
             selectedPos = board.selectPosition (4, 3);
             selectedPos.putPiece (new KnightPiece ());
-            board.plotOverLayPositions (board.nextPossiblePositions (selectedPos));
+            board.plotOverlayPositions (board.nextPossiblePositions (selectedPos));
 
             selectedPos = board.selectPosition (4, 3);
             selectedPos.putPiece (new BishopPiece ());
-            board.plotOverLayPositions (board.nextPossiblePositions (selectedPos));
+            board.plotOverlayPositions (board.nextPossiblePositions (selectedPos));
         }
 
         static void printLegned () {

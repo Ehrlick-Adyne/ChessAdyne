@@ -41,7 +41,7 @@ namespace ChessAdyne {
             Console.WriteLine ("\n");
         }
 
-        public void plotOverLayPositions (Position[] overlayPositions) {
+        public void plotOverlayPositions (Position[] overlayPositions) {
             Board tmpBoard = new Board (this);
             foreach (Position p in overlayPositions) {
                 tmpBoard.selectPosition (p.getDisplayX (), p.getDisplayY ()).putPiece (p.getPiece ());
