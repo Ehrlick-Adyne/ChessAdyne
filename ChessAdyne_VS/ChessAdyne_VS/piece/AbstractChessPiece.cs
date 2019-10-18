@@ -13,21 +13,21 @@ namespace ChessAdyne_VS.piece
             this.type = _type;
         }
 
-        public PieceType getPieceType()
+        public PieceType GetPieceType()
         {
             return this.type;
         }
 
-        public virtual bool allowSkip()
+        public virtual bool AllowSkip()
         {
             return false;
         }
 
-        public virtual MoveRule[] rulesOfNextMove(int boundary)
+        public virtual MoveRule[] RulesOfNextMove(int boundary)
         {
             return new MoveRule[0];
         }
 
-        abstract public string getSymbol();
+        abstract public string GetSymbol();
     }
 }

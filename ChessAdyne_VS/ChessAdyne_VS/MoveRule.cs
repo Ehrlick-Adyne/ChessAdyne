@@ -15,12 +15,12 @@ namespace ChessAdyne_VS
             this.yStep = _yStep;
         }
 
-        public int getXStep()
+        public int GetXStep()
         {
             return xStep;
         }
 
-        public int getYStep()
+        public int GetYStep()
         {
             return yStep;
         }

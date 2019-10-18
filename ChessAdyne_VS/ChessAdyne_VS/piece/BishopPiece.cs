@@ -8,7 +8,7 @@ namespace ChessAdyne_VS.piece
     {
         public BishopPiece() : base(PieceType.Bishop) { }
 
-        public override MoveRule[] rulesOfNextMove(int boundary)
+        public override MoveRule[] RulesOfNextMove(int boundary)
         {
             int possibleDirections = 4;
             int maxNumOfCases = possibleDirections * (boundary - 1);
@@ -26,7 +26,7 @@ namespace ChessAdyne_VS.piece
             return rules;
         }
 
-        public override string getSymbol()
+        public override string GetSymbol()
         {
             return " B ";
         }

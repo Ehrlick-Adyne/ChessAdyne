@@ -5,27 +5,27 @@ using ChessAdyne_VS.piece;
 
 namespace ChessAdyne_VS.validator
 {
-    class PositionIsPiecesInBetweenValidator : AbstractPositionValidator
+    class PositionIsPieceInBetweenValidator : AbstractPositionValidator
     {
-        public PositionIsPiecesInBetweenValidator(Board board) : base(board) { }
+        public PositionIsPieceInBetweenValidator(Board board) : base(board) { }
 
-        public override bool validate()
+        public override bool Validate()
         {
-            checkTargetPosition();
-            checkCurrentPosition();
+            CheckTargetPosition();
+            CheckCurrentPosition();
 
-            if (currentPosition.getPiece().allowSkip())
+            if (currentPosition.GetPiece().AllowSkip())
                 return true;
             else
-                return !isPieceInBetween();
+                return !IsPieceInBetween();
         }
 
-        private bool isPieceInBetween()
+        private bool IsPieceInBetween()
         {
-            int cX = currentPosition.getX() + 1;
-            int cY = currentPosition.getY() + 1;
-            int tX = targetPosition.getX() + 1;
-            int tY = targetPosition.getY() + 1;
+            int cX = currentPosition.GetX() + 1;
+            int cY = currentPosition.GetY() + 1;
+            int tX = targetPosition.GetX() + 1;
+            int tY = targetPosition.GetY() + 1;
 
             int iX = tX - cX;
             int iY = tY - cY;
@@ -42,7 +42,7 @@ namespace ChessAdyne_VS.validator
                     else increX = -i;
                     if (iY > 0) increY = i;
                     else increY = -i;
-                    ps.Add(board.selectPosition(cX + increX, cY + increY));
+                    ps.Add(board.SelectPosition(cX + increX, cY + increY));
                 }
             }
             else if (iX == 0)
@@ -52,7 +52,7 @@ namespace ChessAdyne_VS.validator
                 {
                     if (iY > 0) increY = i;
                     else increY = -i;
-                    ps.Add(board.selectPosition(cX + increX, cY + increY));
+                    ps.Add(board.SelectPosition(cX + increX, cY + increY));
                 }
             }
             else if (iY == 0)
@@ -62,7 +62,7 @@ namespace ChessAdyne_VS.validator
                 {
                     if (iX > 0) increX = i;
                     else increX = -i;
-                    ps.Add(board.selectPosition(cX + increX, cY + increY));
+                    ps.Add(board.SelectPosition(cX + increX, cY + increY));
                 }
             }
             else
@@ -72,9 +72,9 @@ namespace ChessAdyne_VS.validator
 
             foreach (Position p in ps)
             {
-                if (!p.isEmpty())
+                if (!p.IsEmpty())
                 {
-                    switch (p.getPiece().getPieceType())
+                    switch (p.GetPiece().GetPieceType())
                     {
                         case PieceType.NextMove:
                             continue;

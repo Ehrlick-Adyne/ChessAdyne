@@ -31,12 +31,12 @@ namespace ChessAdyne_VS
             {
                 for (int y = 0; y < this.dimension; y++)
                 {
-                    this.positions[x, y] = new Position(board.positions[x, y].getPiece(), x, y);
+                    this.positions[x, y] = new Position(board.positions[x, y].GetPiece(), x, y);
                 }
             }
         }
 
-        public void plot()
+        public void Plot()
         {
             for (int x = this.dimension - 1; x >= 0; x--)
             {
@@ -55,40 +55,40 @@ namespace ChessAdyne_VS
             Console.WriteLine("\n");
         }
 
-        public void plotOverlayPositions(Position[] overlayPositions)
+        public void PlotOverlayPositions(Position[] overlayPositions)
         {
             Board tmpBoard = new Board(this);
             foreach (Position p in overlayPositions)
             {
-                tmpBoard.selectPosition(p.getDisplayX(), p.getDisplayY()).putPiece(p.getPiece());
+                tmpBoard.SelectPosition(p.GetDisplayX(), p.GetDisplayY()).PutPiece(p.GetPiece());
             }
-            tmpBoard.plot();
+            tmpBoard.Plot();
         }
 
-        public int getDimension()
+        public int GetDimension()
         {
             return this.dimension;
         }
 
-        public Position selectPosition(int displayX, int displayY)
+        public Position SelectPosition(int displayX, int displayY)
         {
-            int[] xy = translateXY(displayX, displayY);
+            int[] xy = TranslateXY(displayX, displayY);
             return positions[xy[0], xy[1]];
         }
 
-        public Position[] nextPossiblePositions(Position p)
+        public Position[] NextPossiblePositions(Position p)
         {
-            Console.WriteLine($"-- Plot Possible Next Moves for {p.getPiece().getPieceType().ToString()} ({p.getDisplayX()} , {p.getDisplayY()})");
-            return validPositions(p);
+            Console.WriteLine($"-- Plot Possible Next Moves for {p.GetPiece().GetPieceType().ToString()} ({p.GetDisplayX()} , {p.GetDisplayY()})");
+            return ValidPositions(p);
         }
 
-        private Position[] validPositions(Position currentPos)
+        private Position[] ValidPositions(Position currentPos)
         {
-            Position[] ps = currentPos.nextPossiblePositions(this.dimension);
+            Position[] ps = currentPos.NextPossiblePositions(this.dimension);
 
             PositionValidator[] validators = {
                 new PositionIsOnBoardValidator (this),
-                new PositionIsPiecesInBetweenValidator (this)
+                new PositionIsPieceInBetweenValidator (this)
             };
 
             List<Position> validPs = new List<Position>();
@@ -99,9 +99,9 @@ namespace ChessAdyne_VS
                 Boolean validResult = true;
                 foreach (PositionValidator validator in validators)
                 {
-                    validator.setCurrentPosition(currentPos);
-                    validator.setTargetPosition(targetPos);
-                    if (!validator.validate())
+                    validator.SetCurrentPosition(currentPos);
+                    validator.SetTargetPosition(targetPos);
+                    if (!validator.Validate())
                     {
                         validResult = false;
                         break;
@@ -115,15 +115,15 @@ namespace ChessAdyne_VS
             return validPs.ToArray();
         }
 
-        private int[] translateXY(int displayX, int displayY)
+        private int[] TranslateXY(int displayX, int displayY)
         {
             int x = displayX - 1;
             int y = displayY - 1;
 
             PositionValidator validator = new PositionIsOnBoardValidator(this);
-            validator.setTargetPosition(new Position(null, x, y));
+            validator.SetTargetPosition(new Position(null, x, y));
 
-            if (!validator.validate())
+            if (!validator.Validate())
                 throw new SystemException($"Invalid X/Y: {displayX}/{displayY}");
 
             int[] r = { x, y };

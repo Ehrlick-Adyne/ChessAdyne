@@ -8,13 +8,13 @@ namespace ChessAdyne_VS.validator
     {
         public PositionIsOnBoardValidator(Board board) : base(board) { }
 
-        public override bool validate()
+        public override bool Validate()
         {
-            checkTargetPosition();
+            CheckTargetPosition();
 
-            int targetPX = targetPosition.getX();
-            int targetPY = targetPosition.getY();
-            int boardDimention = board.getDimension();
+            int targetPX = targetPosition.GetX();
+            int targetPY = targetPosition.GetY();
+            int boardDimention = board.GetDimension();
             if (targetPX < 0 || targetPX >= boardDimention || targetPY < 0 || targetPY >= boardDimention)
                 return false;
             else return true;

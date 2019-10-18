@@ -7,28 +7,28 @@ namespace ChessAdyne_VS
     {
         static void Main(string[] args)
         {
-            printLegned();
+            PrintLegned();
 
             Console.WriteLine("-- Preparing Empty ChessBoard");
 
             Board board = new Board();
-            board.plot();
+            board.Plot();
 
             Position selectedPos;
 
-            // board.selectPosition (5, 2).putPiece (new KnightPiece ());
-            // board.selectPosition (7, 6).putPiece (new BishopPiece ());
+            //board.SelectPosition (5, 2).PutPiece (new KnightPiece ());
+            //board.SelectPosition (7, 6).PutPiece (new BishopPiece ());
 
-            selectedPos = board.selectPosition(4, 3);
-            selectedPos.putPiece(new KnightPiece());
-            board.plotOverlayPositions(board.nextPossiblePositions(selectedPos));
+            selectedPos = board.SelectPosition(4, 3);
+            selectedPos.PutPiece(new KnightPiece());
+            board.PlotOverlayPositions(board.NextPossiblePositions(selectedPos));
 
-            selectedPos = board.selectPosition(4, 3);
-            selectedPos.putPiece(new BishopPiece());
-            board.plotOverlayPositions(board.nextPossiblePositions(selectedPos));
+            selectedPos = board.SelectPosition(4, 3);
+            selectedPos.PutPiece(new BishopPiece());
+            board.PlotOverlayPositions(board.NextPossiblePositions(selectedPos));
         }
 
-        static void printLegned()
+        private static void PrintLegned()
         {
             Console.WriteLine("---- Legends ----");
             Console.WriteLine("[ ] : Black Empty Position");

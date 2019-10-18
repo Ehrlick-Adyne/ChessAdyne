@@ -17,55 +17,55 @@ namespace ChessAdyne_VS
             this.piece = _piece;
             this.x = _x;
             this.y = _y;
-            this.color = currentPositionColor(_x, _y);
+            this.color = CurrentPositionColor(_x, _y);
         }
 
-        public int getX()
+        public int GetX()
         {
             return this.x;
         }
 
-        public int getY()
+        public int GetY()
         {
             return this.y;
         }
 
-        public int getDisplayX()
+        public int GetDisplayX()
         {
             return this.x + 1;
         }
 
-        public int getDisplayY()
+        public int GetDisplayY()
         {
             return this.y + 1;
         }
 
-        public ChessPiece getPiece()
+        public ChessPiece GetPiece()
         {
             return this.piece;
         }
 
-        private PositionColor currentPositionColor(int x_, int y_)
+        private PositionColor CurrentPositionColor(int x_, int y_)
         {
             if (((x_ + 1) + (y_ + 1)) % 2 == 0) return PositionColor.Black;
             else return PositionColor.White;
         }
 
-        public bool isEmpty()
+        public bool IsEmpty()
         {
             if (piece == null) return true;
             else return false;
         }
 
-        public void putPiece(ChessPiece piece)
+        public void PutPiece(ChessPiece piece)
         {
-            Console.WriteLine($"-- Put a {piece.getPieceType().ToString()} at ({getDisplayX()} , {getDisplayY()})");
+            Console.WriteLine($"-- Put a {piece.GetPieceType().ToString()} at ({GetDisplayX()} , {GetDisplayY()})");
             this.piece = piece;
         }
 
         public override String ToString()
         {
-            if (isEmpty())
+            if (IsEmpty())
             {
                 switch (color)
                 {
@@ -79,21 +79,21 @@ namespace ChessAdyne_VS
             }
             else
             {
-                return this.getPiece().getSymbol();
+                return this.GetPiece().GetSymbol();
             }
         }
 
-        public Position[] nextPossiblePositions(int boundary)
+        public Position[] NextPossiblePositions(int boundary)
         {
-            MoveRule[] rules = piece.rulesOfNextMove(boundary);
+            MoveRule[] rules = piece.RulesOfNextMove(boundary);
 
             // Generate possible Positions
             Position[] pps = new Position[rules.Length];
             for (int i = 0; i < rules.Length; i++)
             {
                 MoveRule rule = rules[i];
-                int newX = this.x + rule.getXStep();
-                int newY = this.y + rule.getYStep();
+                int newX = this.x + rule.GetXStep();
+                int newY = this.y + rule.GetYStep();
                 pps[i] = new Position(new NextMovePiece(), newX, newY);
             }
 

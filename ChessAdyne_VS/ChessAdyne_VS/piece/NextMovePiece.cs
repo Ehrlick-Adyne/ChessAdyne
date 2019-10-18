@@ -8,7 +8,7 @@ namespace ChessAdyne_VS.piece
     {
         public NextMovePiece() : base(PieceType.NextMove) { }
 
-        public override string getSymbol()
+        public override string GetSymbol()
         {
             return " O ";
         }

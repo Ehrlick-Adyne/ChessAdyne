@@ -6,8 +6,8 @@ namespace ChessAdyne_VS.validator
 {
     interface PositionValidator
     {
-        bool validate();
-        void setCurrentPosition(Position _p);
-        void setTargetPosition(Position _p);
+        bool Validate();
+        void SetCurrentPosition(Position _p);
+        void SetTargetPosition(Position _p);
     }
 }

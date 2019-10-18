@@ -6,9 +6,9 @@ namespace ChessAdyne_VS.piece
 {
     interface ChessPiece
     {
-        PieceType getPieceType();
-        MoveRule[] rulesOfNextMove(int boundary);
-        bool allowSkip();
-        string getSymbol();
+        PieceType GetPieceType();
+        MoveRule[] RulesOfNextMove(int boundary);
+        bool AllowSkip();
+        string GetSymbol();
     }
 }

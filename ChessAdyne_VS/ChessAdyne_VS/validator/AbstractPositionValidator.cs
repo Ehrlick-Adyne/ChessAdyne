@@ -15,17 +15,17 @@ namespace ChessAdyne_VS.validator
             this.board = _board;
         }
 
-        public void setCurrentPosition(Position _p)
+        public void SetCurrentPosition(Position _p)
         {
             this.currentPosition = _p;
         }
 
-        public void setTargetPosition(Position _p)
+        public void SetTargetPosition(Position _p)
         {
             this.targetPosition = _p;
         }
 
-        protected void checkCurrentPosition()
+        protected void CheckCurrentPosition()
         {
             if (this.currentPosition == null)
             {
@@ -33,7 +33,7 @@ namespace ChessAdyne_VS.validator
             }
         }
 
-        protected void checkTargetPosition()
+        protected void CheckTargetPosition()
         {
             if (this.targetPosition == null)
             {
@@ -41,6 +41,6 @@ namespace ChessAdyne_VS.validator
             }
         }
 
-        abstract public bool validate();
+        abstract public bool Validate();
     }
 }
