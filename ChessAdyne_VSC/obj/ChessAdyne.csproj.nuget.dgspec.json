@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ehrli\\VSC\\ChessAdyne\\ChessAdyne.csproj": {}
+    "C:\\Users\\Ehrli\\VSC\\ChessAdyne_VSC\\ChessAdyne.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ehrli\\VSC\\ChessAdyne\\ChessAdyne.csproj": {
+    "C:\\Users\\Ehrli\\VSC\\ChessAdyne_VSC\\ChessAdyne.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ehrli\\VSC\\ChessAdyne\\ChessAdyne.csproj",
+        "projectUniqueName": "C:\\Users\\Ehrli\\VSC\\ChessAdyne_VSC\\ChessAdyne.csproj",
         "projectName": "ChessAdyne",
-        "projectPath": "C:\\Users\\Ehrli\\VSC\\ChessAdyne\\ChessAdyne.csproj",
+        "projectPath": "C:\\Users\\Ehrli\\VSC\\ChessAdyne_VSC\\ChessAdyne.csproj",
         "packagesPath": "C:\\Users\\Ehrli\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ehrli\\VSC\\ChessAdyne\\obj\\",
+        "outputPath": "C:\\Users\\Ehrli\\VSC\\ChessAdyne_VSC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Ehrli\\AppData\\Roaming\\NuGet\\NuGet.Config"
