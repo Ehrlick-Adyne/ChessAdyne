@@ -11,11 +11,11 @@ namespace ChessAdyne_VS
         private int y;
         private PositionColor color;
 
-        public Position(int _x, int _y)
+        public Position(int x, int y)
         {
-            this.x = _x;
-            this.y = _y;
-            this.color = CurrentPositionColor(_x, _y);
+            this.x = x;
+            this.y = y;
+            this.color = CurrentPositionColor(x, y);
         }
 
         public int GetX()
@@ -28,23 +28,18 @@ namespace ChessAdyne_VS
             return this.y;
         }
 
-        public int GetDisplayX()
+        private PositionColor CurrentPositionColor(int x, int y)
         {
-            return this.x + 1;
-        }
-
-        public int GetDisplayY()
-        {
-            return this.y + 1;
-        }
-
-        private PositionColor CurrentPositionColor(int x_, int y_)
-        {
-            if (((x_ + 1) + (y_ + 1)) % 2 == 0) return PositionColor.Black;
+            if ((x + y) % 2 == 0) return PositionColor.Black;
             else return PositionColor.White;
         }
 
-        public override String ToString()
+        public override string ToString()
+        {
+            return $"({x}, {y})";
+        }
+
+        public String GetSymbol()
         {
             switch (color)
             {

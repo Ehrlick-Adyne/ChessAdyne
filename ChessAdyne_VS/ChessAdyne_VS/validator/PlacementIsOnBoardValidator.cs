@@ -15,7 +15,7 @@ namespace ChessAdyne_VS.validator
             int targetPX = targetPlacement.GetPosition().GetX();
             int targetPY = targetPlacement.GetPosition().GetY();
             int boardDimention = board.GetDimension();
-            if (targetPX < 0 || targetPX >= boardDimention || targetPY < 0 || targetPY >= boardDimention)
+            if (targetPX < 1 || targetPX > boardDimention || targetPY < 1 || targetPY > boardDimention)
                 return false;
             else return true;
 

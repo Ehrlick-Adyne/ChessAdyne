@@ -16,14 +16,14 @@ namespace ChessAdyne_VS
 
             Placement p;
 
-            //board.SelectPlacement (5, 2).PutPiece (new KnightPiece ());
-            //board.SelectPlacement (7, 6).PutPiece (new BishopPiece ());
+            //board.SelectPlacement (new Position(5, 2)).PutPiece (new KnightPiece ());
+            //board.SelectPlacement (new Position(7, 6)).PutPiece (new BishopPiece ());
 
-            p = board.SelectPlacement(4, 3);
+            p = board.SelectPlacement(new Position(4, 3));
             p.PutPiece(new KnightPiece());
             board.PlotOverlayPositions(board.NextPossiblePlacements(p));
 
-            p = board.SelectPlacement(4, 3);
+            p = board.SelectPlacement(new Position(4, 3));
             p.PutPiece(new BishopPiece());
             board.PlotOverlayPositions(board.NextPossiblePlacements(p));
         }

@@ -22,10 +22,10 @@ namespace ChessAdyne_VS.validator
 
         private bool IsPieceInBetween()
         {
-            int cX = currentPlacement.GetPosition().GetX() + 1;
-            int cY = currentPlacement.GetPosition().GetY() + 1;
-            int tX = targetPlacement.GetPosition().GetX() + 1;
-            int tY = targetPlacement.GetPosition().GetY() + 1;
+            int cX = currentPlacement.GetPosition().GetX();
+            int cY = currentPlacement.GetPosition().GetY();
+            int tX = targetPlacement.GetPosition().GetX();
+            int tY = targetPlacement.GetPosition().GetY();
 
             int iX = tX - cX;
             int iY = tY - cY;
@@ -42,7 +42,7 @@ namespace ChessAdyne_VS.validator
                     else increX = -i;
                     if (iY > 0) increY = i;
                     else increY = -i;
-                    placements.Add(board.SelectPlacement(cX + increX, cY + increY));
+                    placements.Add(board.SelectPlacement(new Position(cX + increX, cY + increY)));
                 }
             }
             else if (iX == 0)
@@ -52,7 +52,7 @@ namespace ChessAdyne_VS.validator
                 {
                     if (iY > 0) increY = i;
                     else increY = -i;
-                    placements.Add(board.SelectPlacement(cX + increX, cY + increY));
+                    placements.Add(board.SelectPlacement(new Position(cX + increX, cY + increY)));
                 }
             }
             else if (iY == 0)
@@ -62,7 +62,7 @@ namespace ChessAdyne_VS.validator
                 {
                     if (iX > 0) increX = i;
                     else increX = -i;
-                    placements.Add(board.SelectPlacement(cX + increX, cY + increY));
+                    placements.Add(board.SelectPlacement(new Position(cX + increX, cY + increY)));
                 }
             }
             else

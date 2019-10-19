@@ -40,7 +40,7 @@ namespace ChessAdyne_VS
 
         public void PutPiece(ChessPiece p)
         {
-            Console.WriteLine($"-- Put a {p.GetPieceType().ToString()} at ({position.GetDisplayX()} , {position.GetDisplayY()})");
+            Console.WriteLine($"-- Put a {p.GetPieceType().ToString()} at {this.position})");
             this.piece = p;
         }
 
@@ -63,7 +63,7 @@ namespace ChessAdyne_VS
         {
             if (IsEmpty())
             {
-                return position.ToString();
+                return position.GetSymbol();
             }
             else 
             {

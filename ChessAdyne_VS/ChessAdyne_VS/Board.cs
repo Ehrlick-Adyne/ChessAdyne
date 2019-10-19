@@ -7,7 +7,7 @@ namespace ChessAdyne_VS
 {
     class Board
     {
-        private Placement[,] placements;
+        private Dictionary<String, Placement> placements;
         private int dimension = 8;
 
         public Board() : this(8) { }
@@ -15,42 +15,45 @@ namespace ChessAdyne_VS
         public Board(int dimension)
         {
             this.dimension = dimension;
-            this.placements = new Placement[dimension, dimension];
-            for (int x = 0; x < dimension; x++)
+            this.placements = new Dictionary<String, Placement>();
+            for (int x = 1; x <= dimension; x++)
             {
-                for (int y = 0; y < dimension; y++)
+                for (int y = 1; y <= dimension; y++)
                 {
-                    this.placements[x, y] = new Placement(null, new Position(x, y));
+                    Position p = new Position(x, y);
+                    this.placements.Add(p.ToString(), new Placement(null, p));
                 }
             }
         }
 
         public Board(Board board) : this(board.dimension)
         {
-            for (int x = 0; x < this.dimension; x++)
+            this.placements = new Dictionary<String, Placement>();
+            for (int x = 1; x <= this.dimension; x++)
             {
-                for (int y = 0; y < this.dimension; y++)
+                for (int y = 1; y <= this.dimension; y++)
                 {
-                    this.placements[x, y] = new Placement(board.placements[x, y]);
+                    String key = new Position(x, y).ToString();
+                    this.placements.Add(key, new Placement(board.placements[key]));
                 }
             }
         }
 
         public void Plot()
         {
-            for (int x = this.dimension - 1; x >= 0; x--)
+            for (int x = this.dimension; x > 0; x--)
             {
-                Console.Write(x + 1);
-                for (int y = 0; y < this.dimension; y++)
+                Console.Write(x);
+                for (int y = 1; y <= this.dimension; y++)
                 {
-                    Console.Write($" + {this.placements[x, y]}");
+                    Console.Write($" + {this.placements[new Position(x, y).ToString()]}");
                 }
                 Console.WriteLine("\n");
             }
             Console.Write(" ");
-            for (int y = 0; y < this.dimension; y++)
+            for (int y = 1; y <= this.dimension; y++)
             {
-                Console.Write($" +  {y + 1} ");
+                Console.Write($" +  {y} ");
             }
             Console.WriteLine("\n");
         }
@@ -60,8 +63,7 @@ namespace ChessAdyne_VS
             Board tmpBoard = new Board(this);
             foreach (Placement p in overlayPlacements)
             {
-                Position pos = p.GetPosition();
-                tmpBoard.SelectPlacement(pos.GetDisplayX(), pos.GetDisplayY()).PutPiece(p.GetPiece());
+                tmpBoard.SelectPlacement(p.GetPosition()).PutPiece(p.GetPiece());
             }
             tmpBoard.Plot();
         }
@@ -71,15 +73,21 @@ namespace ChessAdyne_VS
             return this.dimension;
         }
 
-        public Placement SelectPlacement(int displayX, int displayY)
+        public Placement SelectPlacement(Position p)
         {
-            int[] xy = TranslateXY(displayX, displayY);
-            return placements[xy[0], xy[1]];
+            string key = p.ToString();
+            if(this.placements.ContainsKey(key))
+            {
+                return this.placements[key];
+            } else
+            {
+                throw new SystemException($"!!! Invalid Position Specified: {p} !!!");
+            }
         }
 
         public Placement[] NextPossiblePlacements(Placement p)
         {
-            Console.WriteLine($"-- Plot Possible Next Moves for {p.GetPiece().GetPieceType().ToString()} ({p.GetPosition().GetDisplayX()} , {p.GetPosition().GetDisplayY()})");
+            Console.WriteLine($"-- Plot Possible Next Moves for {p.GetPiece().GetPieceType()} {p.GetPosition()}");
             return ValidPlacement(p);
         }
 
@@ -110,21 +118,6 @@ namespace ChessAdyne_VS
             }
 
             return validPlacements.ToArray();
-        }
-
-        private int[] TranslateXY(int displayX, int displayY)
-        {
-            int x = displayX - 1;
-            int y = displayY - 1;
-
-            PlacementValidator validator = new PlacementIsOnBoardValidator(this);
-            validator.SetTargetPlacement(new Placement(null, new Position(x, y)));
-
-            if (!validator.Validate())
-                throw new SystemException($"Invalid X/Y: {displayX}/{displayY}");
-
-            int[] r = { x, y };
-            return r;
         }
     }
 }
