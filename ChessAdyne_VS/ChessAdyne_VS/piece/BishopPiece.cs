@@ -22,7 +22,6 @@ namespace ChessAdyne_VS.piece
                 rules[i * possibleDirections + 2] = new MoveRule(-m, m);
                 rules[i * possibleDirections + 3] = new MoveRule(-m, -m);
             }
-
             return rules;
         }
 

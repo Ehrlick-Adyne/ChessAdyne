@@ -8,7 +8,7 @@ namespace ChessAdyne_VS
     class Board
     {
         private Placement[,] placements;
-        private int dimension;
+        private int dimension = 8;
 
         public Board() : this(8) { }
 

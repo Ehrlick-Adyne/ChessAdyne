@@ -7,9 +7,14 @@ namespace ChessAdyne_VS.piece
     class KnightPiece : AbstractChessPiece
     {
         public KnightPiece() : base(PieceType.Knight) { }
+        
         public override MoveRule[] RulesOfNextMove(int boundary)
         {
-            MoveRule[] rules = {
+            return KnightPiece.rules;
+        }
+
+        private static MoveRule[] rules =
+            {
                 new MoveRule(1, 2),
                 new MoveRule(1, -2),
                 new MoveRule(2, 1),
@@ -19,9 +24,6 @@ namespace ChessAdyne_VS.piece
                 new MoveRule(-2, 1),
                 new MoveRule(-2, -1)
             };
-
-            return rules;
-        }
 
         public override bool AllowSkip()
         {
