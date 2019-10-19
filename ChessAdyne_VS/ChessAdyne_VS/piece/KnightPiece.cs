@@ -8,8 +8,9 @@ namespace ChessAdyne_VS.piece
     {
         public KnightPiece() : base(PieceType.Knight) { }
         
-        public override MoveRule[] RulesOfNextMove(int boundary)
-        {
+        protected override MoveRule[] CreateRules(int boundary)
+        { 
+            cachedRules.Add(boundary, KnightPiece.rules);
             return KnightPiece.rules;
         }
 

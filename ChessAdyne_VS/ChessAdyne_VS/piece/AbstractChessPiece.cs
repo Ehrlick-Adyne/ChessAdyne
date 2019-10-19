@@ -23,11 +23,21 @@ namespace ChessAdyne_VS.piece
             return false;
         }
 
-        public virtual MoveRule[] RulesOfNextMove(int boundary)
+        public MoveRule[] RulesOfNextMove(int boundary)
+        {
+            if (cachedRules.ContainsKey(boundary))
+                return cachedRules[boundary];
+            else
+                return CreateRules(boundary);
+        }
+
+        protected virtual MoveRule[] CreateRules(int boundary)
         {
             return new MoveRule[0];
         }
 
         abstract public string GetSymbol();
+
+        protected Dictionary<int, MoveRule[]> cachedRules = new Dictionary<int, MoveRule[]>();
     }
 }
