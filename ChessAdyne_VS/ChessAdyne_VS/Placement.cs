@@ -9,7 +9,6 @@ namespace ChessAdyne_VS
     {
         private ChessPiece piece;
         private Position position;
-        private bool isDummy = false;
 
         public Placement(ChessPiece piece, Position position)
         {
@@ -28,6 +27,14 @@ namespace ChessAdyne_VS
             return this.piece;
         }
 
+        public string GetPieceName()
+        {
+            if (IsEmpty())
+                return "NextMove";
+            else
+                return this.piece.GetPieceType().ToString();
+        }
+
         public Position GetPosition()
         {
             return this.position;
@@ -35,14 +42,7 @@ namespace ChessAdyne_VS
 
         public bool IsEmpty()
         {
-            if (piece == null) return true;
-            else return false;
-        }
-
-        public void PutPiece(ChessPiece p)
-        {
-            Console.WriteLine($"-- Put a {p.GetPieceType().ToString()} at {this.position})");
-            this.piece = p;
+            return this.piece == null;
         }
 
         public Placement[] NextPossiblePlacements(int boundary)
@@ -54,7 +54,7 @@ namespace ChessAdyne_VS
             { 
                 int newX = position.GetX() + rule.GetXStep();
                 int newY = position.GetY() + rule.GetYStep();
-                Placement p = new Placement(this.piece, new Position(newX, newY));
+                Placement p = new Placement(null, new Position(newX, newY));
                 allPossiblePlacements.Add(p);
             }
 
@@ -63,22 +63,15 @@ namespace ChessAdyne_VS
 
         public override String ToString()
         {
-            if (IsEmpty())
-            {
-                return position.GetSymbol();
-            }
-            else 
-            {
-                if (isDummy)
-                    return " O ";
-                else 
-                    return this.piece.GetSymbol();
-            }
+            return $"{GetPieceName()} at {GetPosition()}";
         }
 
-        public void MakeItDummy()
+        public String GetSymbol()
         {
-            this.isDummy = true;
+            if (IsEmpty())
+                return " O ";
+            else
+                return this.piece.GetSymbol();
         }
     }
 }

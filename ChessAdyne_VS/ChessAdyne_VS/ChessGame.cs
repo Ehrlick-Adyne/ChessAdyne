@@ -11,21 +11,19 @@ namespace ChessAdyne_VS
 
             Console.WriteLine("-- Preparing Empty ChessBoard");
 
-            Board board = new Board();
+            Board board = new Board(new AdyneBoardConfig());
             board.Plot();
 
-            Placement p;
+            //board.AddPlacement(new Placement(new KnightPiece(), new Position(5, 2)));
+            //board.AddPlacement(new Placement(new BishopPiece(), new Position(7, 6)));
 
-            //board.SelectPlacement (new Position(5, 2)).PutPiece (new KnightPiece ());
-            //board.SelectPlacement (new Position(7, 6)).PutPiece (new BishopPiece ());
+            Placement p1 = new Placement(new KnightPiece(), new Position(4, 3));
+            board.AddPlacement(p1);
+            board.PlotOverlayPlacements(board.NextPossiblePlacements(p1));
 
-            p = board.SelectPlacement(new Position(4, 3));
-            p.PutPiece(new KnightPiece());
-            board.PlotOverlayPlacements(board.NextPossiblePlacements(p));
-
-            p = board.SelectPlacement(new Position(4, 3));
-            p.PutPiece(new BishopPiece());
-            board.PlotOverlayPlacements(board.NextPossiblePlacements(p));
+            Placement p2 = new Placement(new BishopPiece(), new Position(4, 3));
+            board.AddPlacement(p2);
+            board.PlotOverlayPlacements(board.NextPossiblePlacements(p2));
         }
 
         private static void PrintLegend()

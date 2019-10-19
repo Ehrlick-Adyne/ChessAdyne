@@ -7,51 +7,83 @@ namespace ChessAdyne_VS
 {
     class Board
     {
-        private Dictionary<Position, Placement> placements;
-        private int dimension;
+        private List<Placement> placements;
+        private readonly List<Position> positions = new List<Position>();
+        private BoardConfig config;
 
-        public Board() : this(8) { }
+        public Board() : this(new DefaultBoardConfig()) { }
 
-        public Board(int dimension)
+        public Board(BoardConfig config)
         {
-            this.dimension = dimension;
-            this.placements = new Dictionary<Position, Placement>();
-            for (int x = 1; x <= dimension; x++)
+            this.config = config;
+            this.placements = new List<Placement>();
+
+            int loopStart = config.LowerBound();
+            int loopEnd = config.UpperBound();
+            for (int x = loopStart; x < loopEnd; x++)
             {
-                for (int y = 1; y <= dimension; y++)
+                for (int y = loopStart; y < loopEnd; y++)
                 {
-                    Position key = new Position(x, y);
-                    this.placements.Add(key, new Placement(null, key));
+                    positions.Add(new Position(x, y));
                 }
             }
         }
 
-        public Board(Board board) : this(board.dimension)
+        public Board(Board board) : this(board.config)
         {
-            this.placements = new Dictionary<Position, Placement>();
-            for (int x = 1; x <= this.dimension; x++)
-            {
-                for (int y = 1; y <= this.dimension; y++)
-                {
-                    Position key = new Position(x, y);
-                    this.placements.Add(key, new Placement(board.placements[key]));
-                }
-            }
+            this.placements = new List<Placement>(board.GetPlacements());
+        }
+
+        public List<Placement> GetPlacements()
+        {
+            return this.placements;
+        }
+
+        public void AddPlacement(Placement placement)
+        {
+            PlacementValidator validator = new PlacementIsOnBoardValidator(this);
+            validator.SetTargetPlacement(placement);
+            if (!validator.Validate())
+                throw new SystemException($"{placement} is not on the board");
+
+            Console.WriteLine($"-- Put a {placement}");
+            this.placements.Add(placement);
+        }
+
+        public BoardConfig GetBoardConfig()
+        {
+            return this.config;
         }
 
         public void Plot()
         {
-            for (int x = this.dimension; x > 0; x--)
+            int dimension = config.Dimension();
+            int boardIndexOffset = config.BoardIndexOffset();
+
+            string[,] allSymbols = new string[dimension, dimension];
+            foreach(Position pos in this.positions)
+            {
+                allSymbols[pos.GetX() - boardIndexOffset, pos.GetY() - boardIndexOffset] = pos.GetSymbol();
+            }
+            foreach(Placement plc in this.placements)
+            {
+                Position pos = plc.GetPosition();
+                allSymbols[pos.GetX() - boardIndexOffset, pos.GetY() - boardIndexOffset] = plc.GetSymbol();
+            }
+
+            int loopStart = config.LowerBound();
+            int loopEnd = config.UpperBound();
+            for (int x = loopEnd - 1; x > loopStart - 1; x--)
             {
                 Console.Write(x);
-                for (int y = 1; y <= this.dimension; y++)
+                for (int y = loopStart; y < loopEnd; y++)
                 {
-                    Console.Write($" + {this.placements[new Position(x, y)]}");
+                    Console.Write($" + {allSymbols[x - boardIndexOffset, y - boardIndexOffset]}");
                 }
                 Console.WriteLine("\n");
             }
             Console.Write(" ");
-            for (int y = 1; y <= this.dimension; y++)
+            for (int y = loopStart; y < loopEnd; y++)
             {
                 Console.Write($" +  {y} ");
             }
@@ -63,27 +95,9 @@ namespace ChessAdyne_VS
             Board tmpBoard = new Board(this);
             foreach (Placement p in overlayPlacements)
             {
-                Placement tmpPlacement = tmpBoard.SelectPlacement(p.GetPosition());
-                tmpPlacement.MakeItDummy();
-                tmpPlacement.PutPiece(p.GetPiece());
+                tmpBoard.AddPlacement(p);
             }
             tmpBoard.Plot();
-        }
-
-        public int GetDimension()
-        {
-            return this.dimension;
-        }
-
-        public Placement SelectPlacement(Position p)
-        {
-            if(this.placements.ContainsKey(p))
-            {
-                return this.placements[p];
-            } else
-            {
-                throw new SystemException($"!!! Invalid Position Specified: {p} !!!");
-            }
         }
 
         public Placement[] NextPossiblePlacements(Placement currentPlacement)
@@ -94,7 +108,7 @@ namespace ChessAdyne_VS
 
         private Placement[] ValidPlacement(Placement currentPlacement)
         {
-            Placement[] nextPossiblePlacements = currentPlacement.NextPossiblePlacements(this.dimension);
+            Placement[] nextPossiblePlacements = currentPlacement.NextPossiblePlacements(config.Dimension());
 
             PlacementValidator[] validators = {
                 new PlacementIsOnBoardValidator (this),

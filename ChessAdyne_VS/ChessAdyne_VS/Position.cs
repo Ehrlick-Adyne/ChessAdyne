@@ -36,7 +36,7 @@ namespace ChessAdyne_VS
 
         public override string ToString()
         {
-            return $"({x}, {y})";
+            return $"({x} , {y})";
         }
 
         public String GetSymbol()
