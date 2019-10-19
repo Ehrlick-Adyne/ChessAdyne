@@ -10,19 +10,19 @@ namespace ChessAdyne_VS.validator
         protected Placement currentPlacement;
         protected Placement targetPlacement;
 
-        public AbstractPlaecmentValidator(Board _board)
+        public AbstractPlaecmentValidator(Board board)
         {
-            this.board = _board;
+            this.board = board;
         }
 
-        public void SetCurrentPlacement(Placement _p)
+        public void SetCurrentPlacement(Placement currentPlacement)
         {
-            this.currentPlacement = _p;
+            this.currentPlacement = currentPlacement;
         }
 
-        public void SetTargetPlacement(Placement _p)
+        public void SetTargetPlacement(Placement targetPlacement)
         {
-            this.targetPlacement = _p;
+            this.targetPlacement = targetPlacement;
         }
 
         protected void CheckCurrentPlacement()

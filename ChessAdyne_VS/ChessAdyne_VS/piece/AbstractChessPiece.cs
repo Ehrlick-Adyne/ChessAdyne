@@ -8,9 +8,9 @@ namespace ChessAdyne_VS.piece
     {
         private PieceType type;
 
-        public AbstractChessPiece(PieceType _type)
+        public AbstractChessPiece(PieceType type)
         {
-            this.type = _type;
+            this.type = type;
         }
 
         public PieceType GetPieceType()

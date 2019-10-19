@@ -32,7 +32,7 @@ namespace ChessAdyne_VS.validator
 
             int increX = 0;
             int increY = 0;
-            List<Placement> ps = new List<Placement>();
+            List<Placement> placements = new List<Placement>();
             if (System.Math.Abs(iX) == System.Math.Abs(iY))
             {
                 // diagnostic
@@ -42,7 +42,7 @@ namespace ChessAdyne_VS.validator
                     else increX = -i;
                     if (iY > 0) increY = i;
                     else increY = -i;
-                    ps.Add(board.SelectPlacement(cX + increX, cY + increY));
+                    placements.Add(board.SelectPlacement(cX + increX, cY + increY));
                 }
             }
             else if (iX == 0)
@@ -52,7 +52,7 @@ namespace ChessAdyne_VS.validator
                 {
                     if (iY > 0) increY = i;
                     else increY = -i;
-                    ps.Add(board.SelectPlacement(cX + increX, cY + increY));
+                    placements.Add(board.SelectPlacement(cX + increX, cY + increY));
                 }
             }
             else if (iY == 0)
@@ -62,7 +62,7 @@ namespace ChessAdyne_VS.validator
                 {
                     if (iX > 0) increX = i;
                     else increX = -i;
-                    ps.Add(board.SelectPlacement(cX + increX, cY + increY));
+                    placements.Add(board.SelectPlacement(cX + increX, cY + increY));
                 }
             }
             else
@@ -70,7 +70,7 @@ namespace ChessAdyne_VS.validator
                 return false;
             }
 
-            foreach (Placement p in ps)
+            foreach (Placement p in placements)
             {
                 if (!p.IsEmpty())
                 {

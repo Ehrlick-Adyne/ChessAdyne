@@ -12,9 +12,9 @@ namespace ChessAdyne_VS
 
         public Board() : this(8) { }
 
-        public Board(int d)
+        public Board(int dimension)
         {
-            this.dimension = d;
+            this.dimension = dimension;
             this.placements = new Placement[dimension, dimension];
             for (int x = 0; x < dimension; x++)
             {
@@ -85,15 +85,15 @@ namespace ChessAdyne_VS
 
         private Placement[] ValidPlacement(Placement p)
         {
-            Placement[] ps = p.NextPossiblePlacements(this.dimension);
+            Placement[] nextPossiblePlacements = p.NextPossiblePlacements(this.dimension);
 
             PlacementValidator[] validators = {
                 new PlacementIsOnBoardValidator (this),
                 new PlacementIsPieceInBetweenValidator (this)
             };
 
-            List<Placement> validPs = new List<Placement>();
-            foreach(Placement targetP in ps) {
+            List<Placement> validPlacements = new List<Placement>();
+            foreach(Placement targetP in nextPossiblePlacements) {
                 Boolean validResult = true;
                 foreach (PlacementValidator validator in validators)
                 {
@@ -105,12 +105,11 @@ namespace ChessAdyne_VS
                         break;
                     }
                 }
-
                 if (validResult)
-                    validPs.Add(targetP);
+                    validPlacements.Add(targetP);
             }
 
-            return validPs.ToArray();
+            return validPlacements.ToArray();
         }
 
         private int[] TranslateXY(int displayX, int displayY)

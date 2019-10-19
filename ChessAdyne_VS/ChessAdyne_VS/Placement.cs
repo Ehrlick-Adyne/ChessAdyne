@@ -10,16 +10,16 @@ namespace ChessAdyne_VS
         private ChessPiece piece;
         private Position position;
 
-        public Placement(ChessPiece _piece, Position _position)
+        public Placement(ChessPiece piece, Position position)
         {
-            this.piece = _piece;
-            this.position = _position;
+            this.piece = piece;
+            this.position = position;
         }
 
-        public Placement(Placement _placement)
+        public Placement(Placement placement)
         {
-            this.piece = _placement.piece;
-            this.position = _placement.position;
+            this.piece = placement.piece;
+            this.position = placement.position;
         }
 
         public ChessPiece GetPiece()
@@ -48,17 +48,15 @@ namespace ChessAdyne_VS
         {
             MoveRule[] rules = piece.RulesOfNextMove(boundary);
 
-            // Generate possible Placements
-            Placement[] pps = new Placement[rules.Length];
-            for (int i = 0; i < rules.Length; i++)
-            {
-                MoveRule rule = rules[i];
+            List<Placement> allPossiblePlacements = new List<Placement>();
+            foreach(MoveRule rule in rules)
+            { 
                 int newX = position.GetX() + rule.GetXStep();
                 int newY = position.GetY() + rule.GetYStep();
-                pps[i] = new Placement(new NextMovePiece(), new Position(newX, newY));
+                allPossiblePlacements.Add(new Placement(new NextMovePiece(), new Position(newX, newY)));
             }
 
-            return pps;
+            return allPossiblePlacements.ToArray();
         }
 
         public override String ToString()

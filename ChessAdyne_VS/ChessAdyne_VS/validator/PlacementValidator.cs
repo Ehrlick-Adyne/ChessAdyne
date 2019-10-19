@@ -7,7 +7,7 @@ namespace ChessAdyne_VS.validator
     interface PlacementValidator
     {
         bool Validate();
-        void SetCurrentPlacement(Placement p);
-        void SetTargetPlacement(Placement p);
+        void SetCurrentPlacement(Placement currentPlacement);
+        void SetTargetPlacement(Placement targetPlacement);
     }
 }
