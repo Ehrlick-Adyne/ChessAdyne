@@ -4,16 +4,16 @@ using System.Text;
 
 namespace ChessAdyne_VS.validator
 {
-    class PositionIsOnBoardValidator : AbstractPositionValidator
+    class PlacementIsOnBoardValidator : AbstractPlaecmentValidator
     {
-        public PositionIsOnBoardValidator(Board board) : base(board) { }
+        public PlacementIsOnBoardValidator(Board board) : base(board) { }
 
         public override bool Validate()
         {
-            CheckTargetPosition();
+            CheckTargetPlacement();
 
-            int targetPX = targetPosition.GetX();
-            int targetPY = targetPosition.GetY();
+            int targetPX = targetPlacement.GetPosition().GetX();
+            int targetPY = targetPlacement.GetPosition().GetY();
             int boardDimention = board.GetDimension();
             if (targetPX < 0 || targetPX >= boardDimention || targetPY < 0 || targetPY >= boardDimention)
                 return false;

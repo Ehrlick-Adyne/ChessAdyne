@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ChessAdyne_VS.validator
 {
-    interface PositionValidator
+    interface PlacementValidator
     {
         bool Validate();
-        void SetCurrentPosition(Position _p);
-        void SetTargetPosition(Position _p);
+        void SetCurrentPlacement(Placement p);
+        void SetTargetPlacement(Placement p);
     }
 }

@@ -5,16 +5,16 @@ using ChessAdyne_VS.piece;
 
 namespace ChessAdyne_VS.validator
 {
-    class PositionIsPieceInBetweenValidator : AbstractPositionValidator
+    class PlacementIsPieceInBetweenValidator : AbstractPlaecmentValidator
     {
-        public PositionIsPieceInBetweenValidator(Board board) : base(board) { }
+        public PlacementIsPieceInBetweenValidator(Board board) : base(board) { }
 
         public override bool Validate()
         {
-            CheckTargetPosition();
-            CheckCurrentPosition();
+            CheckTargetPlacement();
+            CheckCurrentPlacement();
 
-            if (currentPosition.GetPiece().AllowSkip())
+            if (currentPlacement.GetPiece().AllowSkip())
                 return true;
             else
                 return !IsPieceInBetween();
@@ -22,17 +22,17 @@ namespace ChessAdyne_VS.validator
 
         private bool IsPieceInBetween()
         {
-            int cX = currentPosition.GetX() + 1;
-            int cY = currentPosition.GetY() + 1;
-            int tX = targetPosition.GetX() + 1;
-            int tY = targetPosition.GetY() + 1;
+            int cX = currentPlacement.GetPosition().GetX() + 1;
+            int cY = currentPlacement.GetPosition().GetY() + 1;
+            int tX = targetPlacement.GetPosition().GetX() + 1;
+            int tY = targetPlacement.GetPosition().GetY() + 1;
 
             int iX = tX - cX;
             int iY = tY - cY;
 
             int increX = 0;
             int increY = 0;
-            List<Position> ps = new List<Position>();
+            List<Placement> ps = new List<Placement>();
             if (System.Math.Abs(iX) == System.Math.Abs(iY))
             {
                 // diagnostic
@@ -42,7 +42,7 @@ namespace ChessAdyne_VS.validator
                     else increX = -i;
                     if (iY > 0) increY = i;
                     else increY = -i;
-                    ps.Add(board.SelectPosition(cX + increX, cY + increY));
+                    ps.Add(board.SelectPlacement(cX + increX, cY + increY));
                 }
             }
             else if (iX == 0)
@@ -52,7 +52,7 @@ namespace ChessAdyne_VS.validator
                 {
                     if (iY > 0) increY = i;
                     else increY = -i;
-                    ps.Add(board.SelectPosition(cX + increX, cY + increY));
+                    ps.Add(board.SelectPlacement(cX + increX, cY + increY));
                 }
             }
             else if (iY == 0)
@@ -62,7 +62,7 @@ namespace ChessAdyne_VS.validator
                 {
                     if (iX > 0) increX = i;
                     else increX = -i;
-                    ps.Add(board.SelectPosition(cX + increX, cY + increY));
+                    ps.Add(board.SelectPlacement(cX + increX, cY + increY));
                 }
             }
             else
@@ -70,7 +70,7 @@ namespace ChessAdyne_VS.validator
                 return false;
             }
 
-            foreach (Position p in ps)
+            foreach (Placement p in ps)
             {
                 if (!p.IsEmpty())
                 {
