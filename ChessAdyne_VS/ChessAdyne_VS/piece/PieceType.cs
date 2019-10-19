@@ -11,7 +11,6 @@ namespace ChessAdyne_VS.piece
         Rook,
         Bishop,
         Knight,
-        Pawn,
-        NextMove
+        Pawn
     }
 }

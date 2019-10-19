@@ -58,12 +58,14 @@ namespace ChessAdyne_VS
             Console.WriteLine("\n");
         }
 
-        public void PlotOverlayPositions(Placement[] overlayPlacements)
+        public void PlotOverlayPlacements(Placement[] overlayPlacements)
         {
             Board tmpBoard = new Board(this);
             foreach (Placement p in overlayPlacements)
             {
-                tmpBoard.SelectPlacement(p.GetPosition()).PutPiece(p.GetPiece());
+                Placement tmpPlacement = tmpBoard.SelectPlacement(p.GetPosition());
+                tmpPlacement.MakeItDummy();
+                tmpPlacement.PutPiece(p.GetPiece());
             }
             tmpBoard.Plot();
         }
@@ -85,15 +87,15 @@ namespace ChessAdyne_VS
             }
         }
 
-        public Placement[] NextPossiblePlacements(Placement p)
+        public Placement[] NextPossiblePlacements(Placement currentPlacement)
         {
-            Console.WriteLine($"-- Plot Possible Next Moves for {p.GetPiece().GetPieceType()} {p.GetPosition()}");
-            return ValidPlacement(p);
+            Console.WriteLine($"-- Plot Possible Next Moves for {currentPlacement.GetPiece().GetPieceType()} {currentPlacement.GetPosition()}");
+            return ValidPlacement(currentPlacement);
         }
 
-        private Placement[] ValidPlacement(Placement p)
+        private Placement[] ValidPlacement(Placement currentPlacement)
         {
-            Placement[] nextPossiblePlacements = p.NextPossiblePlacements(this.dimension);
+            Placement[] nextPossiblePlacements = currentPlacement.NextPossiblePlacements(this.dimension);
 
             PlacementValidator[] validators = {
                 new PlacementIsOnBoardValidator (this),
@@ -101,12 +103,12 @@ namespace ChessAdyne_VS
             };
 
             List<Placement> validPlacements = new List<Placement>();
-            foreach(Placement targetP in nextPossiblePlacements) {
+            foreach(Placement targetPlacement in nextPossiblePlacements) {
                 Boolean validResult = true;
                 foreach (PlacementValidator validator in validators)
                 {
-                    validator.SetCurrentPlacement(p);
-                    validator.SetTargetPlacement(targetP);
+                    validator.SetCurrentPlacement(currentPlacement);
+                    validator.SetTargetPlacement(targetPlacement);
                     if (!validator.Validate())
                     {
                         validResult = false;
@@ -114,7 +116,7 @@ namespace ChessAdyne_VS
                     }
                 }
                 if (validResult)
-                    validPlacements.Add(targetP);
+                    validPlacements.Add(targetPlacement);
             }
 
             return validPlacements.ToArray();

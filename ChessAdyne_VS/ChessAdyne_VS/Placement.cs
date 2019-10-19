@@ -9,6 +9,7 @@ namespace ChessAdyne_VS
     {
         private ChessPiece piece;
         private Position position;
+        private bool isDummy = false;
 
         public Placement(ChessPiece piece, Position position)
         {
@@ -53,7 +54,8 @@ namespace ChessAdyne_VS
             { 
                 int newX = position.GetX() + rule.GetXStep();
                 int newY = position.GetY() + rule.GetYStep();
-                allPossiblePlacements.Add(new Placement(new NextMovePiece(), new Position(newX, newY)));
+                Placement p = new Placement(this.piece, new Position(newX, newY));
+                allPossiblePlacements.Add(p);
             }
 
             return allPossiblePlacements.ToArray();
@@ -67,8 +69,16 @@ namespace ChessAdyne_VS
             }
             else 
             {
-                return this.piece.GetSymbol();
+                if (isDummy)
+                    return " O ";
+                else 
+                    return this.piece.GetSymbol();
             }
+        }
+
+        public void MakeItDummy()
+        {
+            this.isDummy = true;
         }
     }
 }

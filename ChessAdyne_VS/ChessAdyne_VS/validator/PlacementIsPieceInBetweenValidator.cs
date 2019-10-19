@@ -73,16 +73,7 @@ namespace ChessAdyne_VS.validator
             foreach (Placement p in placements)
             {
                 if (!p.IsEmpty())
-                {
-                    switch (p.GetPiece().GetPieceType())
-                    {
-                        case PieceType.NextMove:
-                            continue;
-                        default:
-                            return true;
-                    }
-                }
-
+                    return true;
             }
 
             return false;

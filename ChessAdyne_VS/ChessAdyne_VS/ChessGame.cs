@@ -21,11 +21,11 @@ namespace ChessAdyne_VS
 
             p = board.SelectPlacement(new Position(4, 3));
             p.PutPiece(new KnightPiece());
-            board.PlotOverlayPositions(board.NextPossiblePlacements(p));
+            board.PlotOverlayPlacements(board.NextPossiblePlacements(p));
 
             p = board.SelectPlacement(new Position(4, 3));
             p.PutPiece(new BishopPiece());
-            board.PlotOverlayPositions(board.NextPossiblePlacements(p));
+            board.PlotOverlayPlacements(board.NextPossiblePlacements(p));
         }
 
         private static void PrintLegend()
