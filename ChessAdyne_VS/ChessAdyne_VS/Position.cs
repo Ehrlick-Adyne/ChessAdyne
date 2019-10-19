@@ -5,7 +5,7 @@ using ChessAdyne_VS.piece;
 
 namespace ChessAdyne_VS
 {
-    class Position
+    struct Position
     {
         private int x;
         private int y;
@@ -28,7 +28,7 @@ namespace ChessAdyne_VS
             return this.y;
         }
 
-        private PositionColor CurrentPositionColor(int x, int y)
+        static private PositionColor CurrentPositionColor(int x, int y)
         {
             if ((x + y) % 2 == 0) return PositionColor.Black;
             else return PositionColor.White;

@@ -7,33 +7,33 @@ namespace ChessAdyne_VS
 {
     class Board
     {
-        private Dictionary<String, Placement> placements;
-        private int dimension = 8;
+        private Dictionary<Position, Placement> placements;
+        private int dimension;
 
         public Board() : this(8) { }
 
         public Board(int dimension)
         {
             this.dimension = dimension;
-            this.placements = new Dictionary<String, Placement>();
+            this.placements = new Dictionary<Position, Placement>();
             for (int x = 1; x <= dimension; x++)
             {
                 for (int y = 1; y <= dimension; y++)
                 {
-                    Position p = new Position(x, y);
-                    this.placements.Add(p.ToString(), new Placement(null, p));
+                    Position key = new Position(x, y);
+                    this.placements.Add(key, new Placement(null, key));
                 }
             }
         }
 
         public Board(Board board) : this(board.dimension)
         {
-            this.placements = new Dictionary<String, Placement>();
+            this.placements = new Dictionary<Position, Placement>();
             for (int x = 1; x <= this.dimension; x++)
             {
                 for (int y = 1; y <= this.dimension; y++)
                 {
-                    String key = new Position(x, y).ToString();
+                    Position key = new Position(x, y);
                     this.placements.Add(key, new Placement(board.placements[key]));
                 }
             }
@@ -46,7 +46,7 @@ namespace ChessAdyne_VS
                 Console.Write(x);
                 for (int y = 1; y <= this.dimension; y++)
                 {
-                    Console.Write($" + {this.placements[new Position(x, y).ToString()]}");
+                    Console.Write($" + {this.placements[new Position(x, y)]}");
                 }
                 Console.WriteLine("\n");
             }
@@ -77,10 +77,9 @@ namespace ChessAdyne_VS
 
         public Placement SelectPlacement(Position p)
         {
-            string key = p.ToString();
-            if(this.placements.ContainsKey(key))
+            if(this.placements.ContainsKey(p))
             {
-                return this.placements[key];
+                return this.placements[p];
             } else
             {
                 throw new SystemException($"!!! Invalid Position Specified: {p} !!!");
