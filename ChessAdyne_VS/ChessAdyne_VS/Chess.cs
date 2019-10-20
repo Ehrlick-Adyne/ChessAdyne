@@ -8,6 +8,7 @@ namespace ChessAdyne_VS
     public class Chess
     {
         private Board board;
+
         public Chess(Board board)
         {
             this.board = board;
@@ -15,7 +16,7 @@ namespace ChessAdyne_VS
 
         public List<Placement> NextPossiblePlacements(Placement currentPlacement)
         {
-            Console.WriteLine($"-- Claculating Possible Next Moves for {currentPlacement.GetPiece().GetPieceType()} {currentPlacement.GetPosition()}");
+            Console.WriteLine($"-- Calculating Possible Next Moves for {currentPlacement.GetPiece().GetPieceType()} {currentPlacement.GetPosition()}");
             return ValidPlacements(currentPlacement);
         }
 
