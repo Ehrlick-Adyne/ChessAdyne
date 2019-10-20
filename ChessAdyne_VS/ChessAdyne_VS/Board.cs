@@ -111,7 +111,7 @@ namespace ChessAdyne_VS
 
         public Position RealCoordinateToPosition(int realX, int realY)
         {
-            return new Position(config.LowerBound() + realX, config.LowerBound() + realY);
+            return new Position(config.BoardIndexOffset() + realX, config.BoardIndexOffset() + realY);
         }
 
     }
