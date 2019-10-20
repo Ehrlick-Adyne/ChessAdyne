@@ -5,7 +5,7 @@ using ChessAdyne_VS.piece;
 
 namespace ChessAdyne_VS
 {
-    class Placement
+    public class Placement
     {
         private ChessPiece piece;
         private Position position;

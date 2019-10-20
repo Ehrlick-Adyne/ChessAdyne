@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChessAdyne_VS.piece
 {
-    enum PieceType
+    public enum PieceType
     {
         King,
         Queue,

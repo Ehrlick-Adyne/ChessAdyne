@@ -4,14 +4,14 @@ using System.Text;
 
 namespace ChessAdyne_VS
 {
-    interface BoardConfig
+    public interface BoardConfig
     {
         int BoardIndexOffset();
         int Dimension();
         int LowerBound();
         int UpperBound();
     }
-    abstract class AbstractBoardConfig : BoardConfig
+    abstract public class AbstractBoardConfig : BoardConfig
     {
         public static int DefaultBoardIndexOffSet = 0;
         public static int DefaultDimension = 8;
@@ -48,9 +48,9 @@ namespace ChessAdyne_VS
         }
     }
 
-    class DefaultBoardConfig : AbstractBoardConfig { } 
+    public class DefaultBoardConfig : AbstractBoardConfig { } 
 
-    class AdyneBoardConfig : AbstractBoardConfig
+    public class AdyneBoardConfig : AbstractBoardConfig
     {
         private static int AdyneBoardIndexOffset = 1;
         public AdyneBoardConfig() : base(AdyneBoardIndexOffset, AbstractBoardConfig.DefaultDimension) { }

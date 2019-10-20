@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChessAdyne_VS.piece
 {
-    class KnightPiece : AbstractChessPiece
+    public class KnightPiece : AbstractChessPiece
     {
         public KnightPiece() : base(PieceType.Knight) { }
         

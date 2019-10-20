@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChessAdyne_VS
 {
-    class MoveRule
+    public class MoveRule
     {
         private int xStep;
         private int yStep;

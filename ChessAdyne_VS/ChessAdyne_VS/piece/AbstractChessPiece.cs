@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChessAdyne_VS.piece
 {
-    abstract class AbstractChessPiece : ChessPiece
+    public abstract class AbstractChessPiece : ChessPiece
     {
         private PieceType type;
 

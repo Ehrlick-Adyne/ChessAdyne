@@ -5,7 +5,7 @@ using ChessAdyne_VS.piece;
 
 namespace ChessAdyne_VS
 {
-    struct Position
+    public struct Position
     {
         private int x;
         private int y;

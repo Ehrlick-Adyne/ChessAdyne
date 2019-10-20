@@ -5,7 +5,7 @@ using ChessAdyne_VS.validator;
 
 namespace ChessAdyne_VS
 {
-    class Board
+    public class Board
     {
         private List<Placement> placements;
         private readonly List<Position> positions = new List<Position>();
@@ -98,15 +98,20 @@ namespace ChessAdyne_VS
             Console.WriteLine("\n");
         }
 
-        public void PlotOverlayPlacements(Placement[] overlayPlacements)
+        public void PlotOverlayPlacements(List<Placement> overlayPlacements)
         {
-            Console.WriteLine($"-- Plotting {overlayPlacements.Length} overlay placements on the board");
+            Console.WriteLine($"-- Plotting {overlayPlacements.Count} overlay placements on the board");
             Board tmpBoard = new Board(this);
             foreach (Placement p in overlayPlacements)
             {
                 tmpBoard.Place(p);
             }
             tmpBoard.Plot();
+        }
+
+        public Position RealCoordinateToPosition(int realX, int realY)
+        {
+            return new Position(config.LowerBound() + realX, config.LowerBound() + realY);
         }
 
     }

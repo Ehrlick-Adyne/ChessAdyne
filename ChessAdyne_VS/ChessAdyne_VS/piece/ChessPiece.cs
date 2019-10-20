@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChessAdyne_VS.piece
 {
-    interface ChessPiece
+    public interface ChessPiece
     {
         PieceType GetPieceType();
         MoveRule[] RulesOfNextMove(int boundary);

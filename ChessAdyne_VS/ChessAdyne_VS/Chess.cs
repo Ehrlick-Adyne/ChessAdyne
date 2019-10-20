@@ -5,7 +5,7 @@ using ChessAdyne_VS.validator;
 
 namespace ChessAdyne_VS
 {
-    class Chess
+    public class Chess
     {
         private Board board;
         public Chess(Board board)
@@ -13,13 +13,13 @@ namespace ChessAdyne_VS
             this.board = board;
         }
 
-        public Placement[] NextPossiblePlacements(Placement currentPlacement)
+        public List<Placement> NextPossiblePlacements(Placement currentPlacement)
         {
             Console.WriteLine($"-- Claculating Possible Next Moves for {currentPlacement.GetPiece().GetPieceType()} {currentPlacement.GetPosition()}");
             return ValidPlacements(currentPlacement);
         }
 
-        private Placement[] ValidPlacements(Placement currentPlacement)
+        private List<Placement> ValidPlacements(Placement currentPlacement)
         {
             Placement[] nextPossiblePlacements = currentPlacement.NextPossiblePlacements(board.GetBoardConfig().Dimension());
 
@@ -46,7 +46,7 @@ namespace ChessAdyne_VS
                     validPlacements.Add(targetPlacement);
             }
 
-            return validPlacements.ToArray();
+            return validPlacements;
         }
     }
 }
