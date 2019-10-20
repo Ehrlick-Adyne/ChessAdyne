@@ -92,6 +92,7 @@ namespace ChessAdyne_VS
 
         public void PlotOverlayPlacements(Placement[] overlayPlacements)
         {
+            Console.WriteLine($"-- Plotting {overlayPlacements.Length} overlay placements on the board");
             Board tmpBoard = new Board(this);
             foreach (Placement p in overlayPlacements)
             {
@@ -102,11 +103,11 @@ namespace ChessAdyne_VS
 
         public Placement[] NextPossiblePlacements(Placement currentPlacement)
         {
-            Console.WriteLine($"-- Plot Possible Next Moves for {currentPlacement.GetPiece().GetPieceType()} {currentPlacement.GetPosition()}");
-            return ValidPlacement(currentPlacement);
+            Console.WriteLine($"-- Claculating Possible Next Moves for {currentPlacement.GetPiece().GetPieceType()} {currentPlacement.GetPosition()}");
+            return ValidPlacements(currentPlacement);
         }
 
-        private Placement[] ValidPlacement(Placement currentPlacement)
+        private Placement[] ValidPlacements(Placement currentPlacement)
         {
             Placement[] nextPossiblePlacements = currentPlacement.NextPossiblePlacements(config.Dimension());
 
