@@ -27,38 +27,24 @@ namespace ChessAdyne_VS
             return this.piece;
         }
 
-        public string GetPieceName()
-        {
-            if (IsEmpty())
-                return "NextMove";
-            else
-                return this.piece.GetPieceType().ToString();
-        }
-
         public Position GetPosition()
         {
             return this.position;
-        }
-
-        public bool IsEmpty()
-        {
-            return this.piece == null;
         }
 
         public Placement[] NextPossiblePlacements(int boundary)
         {
             MoveRule[] rules = piece.RulesOfNextMove(boundary);
 
-            List<Placement> allPossiblePlacements = new List<Placement>();
+            List<Placement> allPossiblePlacement = new List<Placement>();
             foreach(MoveRule rule in rules)
             { 
                 int newX = position.GetX() + rule.GetXStep();
                 int newY = position.GetY() + rule.GetYStep();
-                Placement p = new Placement(null, new Position(newX, newY));
-                allPossiblePlacements.Add(p);
+                allPossiblePlacement.Add(new NextMovePlacement(new Position(newX, newY)));
             }
 
-            return allPossiblePlacements.ToArray();
+            return allPossiblePlacement.ToArray();
         }
 
         public override String ToString()
@@ -66,12 +52,30 @@ namespace ChessAdyne_VS
             return $"{GetPieceName()} at {GetPosition()}";
         }
 
-        public String GetSymbol()
+        public virtual String GetSymbol()
         {
-            if (IsEmpty())
-                return " O ";
-            else
-                return this.piece.GetSymbol();
+            return this.piece.GetSymbol();
+        }
+
+        public virtual String GetPieceName()
+        {
+           return this.piece.GetPieceType().ToString();
+        }
+    }
+
+    class NextMovePlacement : Placement
+    {
+        private static readonly ChessPiece emptyPiece = null;
+        public NextMovePlacement(Position position) : base(emptyPiece, position) { }
+
+        public override string GetSymbol()
+        {
+            return " O ";
+        }
+
+        public override string GetPieceName()
+        {
+            return "NextMove";
         }
     }
 }
