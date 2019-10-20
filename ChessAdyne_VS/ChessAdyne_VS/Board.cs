@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using ChessAdyne_VS.piece;
 using ChessAdyne_VS.validator;
 
 namespace ChessAdyne_VS
@@ -39,7 +39,13 @@ namespace ChessAdyne_VS
             return this.placements;
         }
 
-        public void AddPlacement(Placement placement)
+        public Placement Place(ChessPiece piece, Position position)
+        {
+            Placement placement = new Placement(piece, position);
+            return Place(placement);
+        }
+
+        public Placement Place(Placement placement)
         {
             PlacementValidator validator = new PlacementIsOnBoardValidator(this);
             validator.SetTargetPlacement(placement);
@@ -48,6 +54,8 @@ namespace ChessAdyne_VS
 
             Console.WriteLine($"-- Put a {placement}");
             this.placements.Add(placement);
+
+            return placement;
         }
 
         public BoardConfig GetBoardConfig()
@@ -96,44 +104,10 @@ namespace ChessAdyne_VS
             Board tmpBoard = new Board(this);
             foreach (Placement p in overlayPlacements)
             {
-                tmpBoard.AddPlacement(p);
+                tmpBoard.Place(p);
             }
             tmpBoard.Plot();
         }
 
-        public Placement[] NextPossiblePlacements(Placement currentPlacement)
-        {
-            Console.WriteLine($"-- Claculating Possible Next Moves for {currentPlacement.GetPiece().GetPieceType()} {currentPlacement.GetPosition()}");
-            return ValidPlacements(currentPlacement);
-        }
-
-        private Placement[] ValidPlacements(Placement currentPlacement)
-        {
-            Placement[] nextPossiblePlacements = currentPlacement.NextPossiblePlacements(config.Dimension());
-
-            PlacementValidator[] validators = {
-                new PlacementIsOnBoardValidator (this),
-                new PlacementIsPieceInBetweenValidator (this)
-            };
-
-            List<Placement> validPlacements = new List<Placement>();
-            foreach(Placement targetPlacement in nextPossiblePlacements) {
-                Boolean validResult = true;
-                foreach (PlacementValidator validator in validators)
-                {
-                    validator.SetCurrentPlacement(currentPlacement);
-                    validator.SetTargetPlacement(targetPlacement);
-                    if (!validator.Validate())
-                    {
-                        validResult = false;
-                        break;
-                    }
-                }
-                if (validResult)
-                    validPlacements.Add(targetPlacement);
-            }
-
-            return validPlacements.ToArray();
-        }
     }
 }
