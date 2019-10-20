@@ -17,11 +17,7 @@ namespace ChessAdyne_VS
         public List<Placement> NextPossiblePlacements(Placement currentPlacement)
         {
             Console.WriteLine($"-- Calculating Possible Next Moves for {currentPlacement.GetPiece().GetPieceType()} {currentPlacement.GetPosition()}");
-            return ValidPlacements(currentPlacement);
-        }
 
-        private List<Placement> ValidPlacements(Placement currentPlacement)
-        {
             Placement[] nextPossiblePlacements = currentPlacement.NextPossiblePlacements(board.GetBoardConfig().Dimension());
 
             PlacementValidator[] validators = {
