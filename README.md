@@ -32,7 +32,8 @@ ChessAdyne in C#
   +  1  +  2  +  3  +  4  +  5  +  6  +  7  +  8
 
 -- Put a Knight at (4 , 3)
--- Plot Possible Next Moves for Knight (4 , 3)
+-- Calculating Possible Next Moves for Knight (4 , 3)
+-- Plotting 8 overlay placements on the board
 -- Put a NextMove at (5 , 5)
 -- Put a NextMove at (5 , 1)
 -- Put a NextMove at (6 , 4)
@@ -60,7 +61,8 @@ ChessAdyne in C#
   +  1  +  2  +  3  +  4  +  5  +  6  +  7  +  8
 
 -- Put a Bishop at (4 , 3)
--- Plot Possible Next Moves for Bishop (4 , 3)
+-- Calculating Possible Next Moves for Bishop (4 , 3)
+-- Plotting 11 overlay placements on the board
 -- Put a NextMove at (5 , 4)
 -- Put a NextMove at (5 , 2)
 -- Put a NextMove at (3 , 4)
